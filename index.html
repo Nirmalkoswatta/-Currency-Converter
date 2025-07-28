@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter Pro</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-exchange-alt"></i> Currency Converter Pro</h1>
+                <div class="header-controls">
+                    <select id="languageSelect" class="language-select">
+                        <option value="en">🇺🇸 English</option>
+                        <option value="si">🇱🇰 සිංහල</option>
+                    </select>
+                    <button id="themeToggle" class="theme-toggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Converter -->
+        <main class="main-content">
+            <div class="converter-card">
+                <div class="converter-grid">
+                    <!-- From Section -->
+                    <div class="currency-section from-section">
+                        <label class="currency-label" data-translate="from">From</label>
+                        <div class="amount-input-container">
+                            <input type="number" id="fromAmount" class="amount-input" placeholder="Enter amount" value="1">
+                        </div>
+                        <div class="currency-select-container">
+                            <select id="fromCurrency" class="currency-select">
+                                <option value="USD">🇺🇸 USD - US Dollar</option>
+                                <option value="EUR">🇪🇺 EUR - Euro</option>
+                                <option value="GBP">🇬🇧 GBP - British Pound</option>
+                                <option value="JPY">🇯🇵 JPY - Japanese Yen</option>
+                                <option value="LKR">🇱🇰 LKR - Sri Lankan Rupee</option>
+                                <option value="INR">🇮🇳 INR - Indian Rupee</option>
+                                <option value="CAD">🇨🇦 CAD - Canadian Dollar</option>
+                                <option value="AUD">🇦🇺 AUD - Australian Dollar</option>
+                                <option value="CHF">🇨🇭 CHF - Swiss Franc</option>
+                                <option value="CNY">🇨🇳 CNY - Chinese Yuan</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Swap Button -->
+                    <div class="swap-section">
+                        <button id="swapButton" class="swap-button" title="Swap currencies">
+                            <i class="fas fa-exchange-alt"></i>
+                        </button>
+                    </div>
+
+                    <!-- To Section -->
+                    <div class="currency-section to-section">
+                        <label class="currency-label" data-translate="to">To</label>
+                        <div class="result-container">
+                            <div id="toAmount" class="result-amount">0.00</div>
+                        </div>
+                        <div class="currency-select-container">
+                            <select id="toCurrency" class="currency-select">
+                                <option value="USD">🇺🇸 USD - US Dollar</option>
+                                <option value="EUR">🇪🇺 EUR - Euro</option>
+                                <option value="GBP">🇬🇧 GBP - British Pound</option>
+                                <option value="JPY">🇯🇵 JPY - Japanese Yen</option>
+                                <option value="LKR" selected>🇱🇰 LKR - Sri Lankan Rupee</option>
+                                <option value="INR">🇮🇳 INR - Indian Rupee</option>
+                                <option value="CAD">🇨🇦 CAD - Canadian Dollar</option>
+                                <option value="AUD">🇦🇺 AUD - Australian Dollar</option>
+                                <option value="CHF">🇨🇭 CHF - Swiss Franc</option>
+                                <option value="CNY">🇨🇳 CNY - Chinese Yuan</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Convert Button -->
+                <button id="convertButton" class="convert-button">
+                    <i class="fas fa-calculator"></i>
+                    <span data-translate="convert">Convert</span>
+                </button>
+
+                <!-- Exchange Rate Info -->
+                <div id="exchangeRateInfo" class="exchange-rate-info">
+                    <span data-translate="exchangeRate">Exchange Rate:</span> 
+                    <span id="rateDisplay">Loading...</span>
+                </div>
+
+                <!-- Loading Indicator -->
+                <div id="loadingIndicator" class="loading-indicator hidden">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <span data-translate="loading">Loading exchange rates...</span>
+                </div>
+            </div>
+
+            <!-- Favorite Currencies -->
+            <div class="favorites-section">
+                <h3 data-translate="favorites">Favorite Currency Pairs</h3>
+                <div id="favoritesList" class="favorites-list">
+                    <!-- Favorites will be populated by JavaScript -->
+                </div>
+                <button id="saveFavoriteButton" class="save-favorite-button">
+                    <i class="fas fa-heart"></i>
+                    <span data-translate="saveFavorite">Save Current Pair</span>
+                </button>
+            </div>
+
+            <!-- Historical Data Section -->
+            <div class="historical-section">
+                <h3 data-translate="historical">Historical Exchange Rates</h3>
+                <div class="historical-controls">
+                    <input type="date" id="historicalDate" class="date-input">
+                    <button id="getHistoricalButton" class="historical-button">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span data-translate="getHistorical">Get Historical Rate</span>
+                    </button>
+                </div>
+                <div id="historicalResult" class="historical-result hidden">
+                    <!-- Historical result will be displayed here -->
+                </div>
+                
+                <!-- Chart Container -->
+                <div class="chart-container">
+                    <canvas id="exchangeRateChart"></canvas>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p data-translate="footerText">Powered by real-time exchange rates from ExchangeRate-API</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
